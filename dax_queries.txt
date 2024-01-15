@@ -1,0 +1,51 @@
+Total count of customers who have at least one invoice item in the last 2 years:
+CALCULATE(
+    COUNTROWS('Customer'),
+    KEEPFILTERS(
+        YEAR(
+            'Invoice'[issue_date]
+        )
+        > YEAR(TODAY()) - 2
+    )
+)
+
+Number of distinct countries:
+DISTINCTCOUNT('Customer'[country])
+
+Total count of products with 'ACTIVE' status
+CALCULATE(
+    COUNTROWS('Product'),
+    KEEPFILTERS(
+        'Product'[status] = "ACTIVE"
+    )
+)
+
+Active Customers Last Year = 
+CALCULATE(
+    DISTINCTCOUNT(Invoice[customer_id]),
+    FILTER(
+        ALL('Invoice'), 
+        Invoice[issue_date] > DATE(2022, 7, 1) && 
+        Invoice[issue_date] <= DATE(2023, 7, 31)
+    )
+)
+
+Eligible Products for Reorder = 
+CALCULATE(
+    DISTINCTCOUNT(InvoiceItem[product_code]),
+    FILTER(
+        ALL('InvoiceItem'),
+        Invoice[issue_date] > DATE(2022, 7, 1) && 
+        Invoice[issue_date] <= DATE(2023, 1, 1)
+    )
+)
+
+Products Not Purchased Last 6 Months = 
+CALCULATE(
+    DISTINCTCOUNT(InvoiceItem[product_code]),
+    FILTER(
+        ALL('InvoiceItem'),
+        Invoice[issue_date] <= DATE(2023, 1, 1)
+    )
+)
+
