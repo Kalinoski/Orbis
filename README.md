@@ -23,4 +23,3 @@ Project supervisor: Dr. Nina Rizun.
 Interfaculty field of study: Data Engineering.
 Realized at: Wydział Zarządzania i Ekonomii, Wydział Elektroniki, Telekomunikacji i Informatyki.
 Profile: Data exploration in management.
-
